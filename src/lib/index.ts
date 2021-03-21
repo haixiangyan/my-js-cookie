@@ -4,7 +4,7 @@
 import {defaultAttributes, defaultConverter, TWENTY_FOUR_HOURS} from './constants'
 import {Attributes, Converter} from './types'
 
-function init(customConverter: Converter, customAttributes: Attributes) {
+function init(initConverter: Converter, initAttributes: Attributes) {
   function get(key: string): string | null {
     if (typeof document === 'undefined') return null
 
@@ -16,7 +16,7 @@ function init(customConverter: Converter, customAttributes: Attributes) {
       const [curtKey, ...curtValue] = pair.split('=')
 
       try {
-        const decodeedValue = customConverter.decode(curtValue.join('='))  // 有可能 value 存在 '='
+        const decodeedValue = initConverter.decode(curtValue.join('='))  // 有可能 value 存在 '='
         cookieStore[curtKey] = decodeedValue
       } catch (e) {}
 
@@ -29,10 +29,10 @@ function init(customConverter: Converter, customAttributes: Attributes) {
   /**
    * 设置 Cookie key-val 对
    */
-  function set(key: string, value: string, attributes = customAttributes): string | null {
+  function set(key: string, value: string, attributes = initAttributes): string | null {
     if (typeof document === 'undefined') return null
 
-    attributes = {...customAttributes, ...attributes}
+    attributes = {...initAttributes, ...attributes}
 
     if (attributes.expires) {
       // 将过期天数转为 UTC string
@@ -42,7 +42,7 @@ function init(customConverter: Converter, customAttributes: Attributes) {
       }
     }
 
-    value = customConverter.encode(value)
+    value = initConverter.encode(value)
 
     // 获取 Cookie 其它属性的字符串形式
     const attrStr = Object.entries(attributes).reduce((prevStr, attrPair) => {
@@ -67,16 +67,32 @@ function init(customConverter: Converter, customAttributes: Attributes) {
   /**
    * 删除某个 Cookie
    */
-  function del(key: string, attributes = customAttributes) {
+  function del(key: string, attributes = initAttributes) {
     // 将 expires 减 1 天，Cookie 自动失败
     set(key, '', {...attributes, expires: -1})
   }
 
-  return {
-    get,
-    set,
-    del
+  /**
+   * 添加自定义 converter
+   */
+  function withConverter(customConverter: Converter) {
+    return init({...this.converter, ...customConverter}, this.attributes)
   }
+
+  /**
+   * 添加自定义 attributes
+   */
+  function withAttributes(customAttributes: Attributes) {
+    return init(this.converter, {...this.attributes, ...customAttributes})
+  }
+
+  return Object.create(
+    {get, set, del, withConverter, withAttributes},
+    {
+      converter: {value: Object.freeze(initConverter)},
+      attributes: {value: Object.freeze(initAttributes)},
+    }
+  )
 }
 
 export default init(defaultConverter, defaultAttributes)
