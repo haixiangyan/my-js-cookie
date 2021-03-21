@@ -1,16 +1,19 @@
-import './styles.css'
-import Icon from './icon.png';
+import Cookies from './lib/index'
 
-// Add title
-const text: string = 'A minimum template for building a static web app with TypeScript'
+const key = 'name'
+const value = 'Jack'
 
-const $content = document.querySelector('#content')
+// Display all cookies
+console.log('All Cookies', document.cookie)
 
-$content.textContent = text
+// Set a cookie, and display all cookies(The new one should be in the document.cookie)
+Cookies.set(key, value)
+console.log(`Already set cookie: ${key}=${value}`, document.cookie)
 
-// Add the image to our existing div.
-const myIcon = new Image();
-myIcon.src = Icon;
+// Get a cookie, and display the result
+const result = Cookies.get(key)
+console.log(`Get ${key} from cookie`, result)
 
-document.body.appendChild(myIcon);
-
+// Delete a cookie, and show all cookies(Should be deleted)
+Cookies.del(key)
+console.log(`Del ${key} cookie`, document.cookie)
