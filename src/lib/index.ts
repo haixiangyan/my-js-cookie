@@ -11,9 +11,12 @@ function get(key: string): string | null {
   const cookieStore: Record<string, string> = {}
 
   cookiePairs.some(pair => {
-    const [curtKey, ...curtValues] = pair.split('=')
+    const [curtKey, ...curtValue] = pair.split('=')
 
-    cookieStore[curtKey] = curtValues.join('=') // 有可能 value 存在 '='
+    try {
+      const parsedValue = decodeURIComponent(curtValue.join('-\='))  // 有可能 value 存在 '='
+      cookieStore[curtKey] = parsedValue
+    } catch (e) {}
 
     return curtKey === key // 如果相等时，就会 break
   })
@@ -36,6 +39,8 @@ function set(key: string, value: string, attributes = defaultAttributes): string
       attributes.expires = attributes.expires.toUTCString()
     }
   }
+
+  value = encodeURIComponent(value)
 
   // 获取 Cookie 其它属性的字符串形式
   const attrStr = Object.entries(attributes).reduce((prevStr, attrPair) => {
