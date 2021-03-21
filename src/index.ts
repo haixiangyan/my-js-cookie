@@ -1,19 +1,48 @@
 import Cookies from './lib/index'
 
-const key = 'name'
-const value = 'Jack'
+const $getForm = document.querySelector<HTMLFormElement>('#getForm')
+const $setForm = document.querySelector<HTMLFormElement>('#setForm')
+const $delForm = document.querySelector<HTMLFormElement>('#delForm')
 
-// 显示所有 Cookie
-console.log('All Cookies', document.cookie)
+const $setKey = document.querySelector<HTMLInputElement>('#setKey')
+const $setValue = document.querySelector<HTMLInputElement>('#setValue')
 
-// 设置 Cookie，然后展示所有 Cookie
-Cookies.set(key, value)
-console.log(`Already set cookie: ${key}=${value}`, document.cookie)
+const $getKey = document.querySelector<HTMLInputElement>('#getKey')
+const $getValue = document.querySelector<HTMLParagraphElement>('#getValue')
 
-// 获取 Cookie，展示结果
-const result = Cookies.get(key)
-console.log(`Get ${key} from cookie`, result)
+const $delKey = document.querySelector<HTMLInputElement>('#delKey')
 
-// 删除 Cookie，展示所有 Cookie
-Cookies.del(key)
-console.log(`Del ${key} cookie`, document.cookie)
+const $cookie = document.querySelector('#cookie')
+
+$setForm.onsubmit = (e) => {
+  e.preventDefault()
+
+  const key = $setKey.value
+  const value = $setValue.value
+
+  Cookies.set(key, value)
+
+  $cookie.textContent = document.cookie
+}
+
+$getForm.onsubmit = (e) => {
+  e.preventDefault()
+
+  const key = $getKey.value
+
+  const value = Cookies.get(key)
+
+  $getValue.textContent = value
+}
+
+$delForm.onsubmit = (e) => {
+  e.preventDefault()
+
+  const key = $delKey.value
+
+  Cookies.del(key)
+
+  $cookie.textContent = document.cookie
+}
+
+$cookie.textContent = document.cookie

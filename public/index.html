@@ -5,5 +5,58 @@
   <title>My js-cookie</title>
 </head>
 <body>
+
+<div>
+  <h2>Cookie.set</h2>
+  <form id="setForm">
+    <label for="setKey">
+      Key
+      <input id="setKey" type="text">
+    </label>
+    <label for="setValue">
+      Value
+      <input id="setValue" type="text">
+    </label>
+
+    <button type="submit" id="setCookie">Cookie.set</button>
+  </form>
+</div>
+
+<div>
+  <h2>Cookie.get</h2>
+  <form id="getForm">
+    <label for="getKey">
+      Key
+      <input id="getKey" type="text">
+    </label>
+
+    <button type="submit" id="getCookie">Cookie.get</button>
+  </form>
+
+  <p>
+    Result:
+    <span id="getValue"></span>
+  </p>
+</div>
+
+<div>
+  <h2>Cookie.del</h2>
+  <form id="delForm">
+    <label for="getKey">
+      Key
+      <input id="delKey" type="text">
+    </label>
+
+    <button type="submit" id="delCookie">Cookie.del</button>
+  </form>
+</div>
+
+<div>
+  <h2>document.cookie</h2>
+  <p>
+    document.cookie =
+    <span id="cookie"></span>
+  </p>
+</div>
 </body>
 </html>
