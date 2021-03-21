@@ -3,17 +3,17 @@ import Cookies from './lib/index'
 const key = 'name'
 const value = 'Jack'
 
-// Display all cookies
+// 显示所有 Cookie
 console.log('All Cookies', document.cookie)
 
-// Set a cookie, and display all cookies(The new one should be in the document.cookie)
+// 设置 Cookie，然后展示所有 Cookie
 Cookies.set(key, value)
 console.log(`Already set cookie: ${key}=${value}`, document.cookie)
 
-// Get a cookie, and display the result
+// 获取 Cookie，展示结果
 const result = Cookies.get(key)
 console.log(`Get ${key} from cookie`, result)
 
-// Delete a cookie, and show all cookies(Should be deleted)
+// 删除 Cookie，展示所有 Cookie
 Cookies.del(key)
 console.log(`Del ${key} cookie`, document.cookie)
