@@ -18,7 +18,7 @@
       <input id="setValue" type="text">
     </label>
 
-    <button type="submit" id="setCookie">set</button>
+    <button type="submit" id="setCookie">Cookies.set(..., ...)</button>
   </form>
 </div>
 
@@ -30,7 +30,7 @@
       <input id="getKey" type="text">
     </label>
 
-    <button type="submit" id="getCookie">get</button>
+    <button type="submit" id="getCookie">Cookies.get(...)</button>
   </form>
 
   <p>
@@ -47,14 +47,14 @@
       <input id="delKey" type="text">
     </label>
 
-    <button type="submit" id="delCookie">del</button>
+    <button type="submit" id="delCookie">Cookies.del(...)</button>
   </form>
 </div>
 
 <div>
   <h2>withConverter</h2>
   <p>点击后，所有的 get 返回 Hello；所有 set 的值为 World</p>
-  <button type="button" id="withConverter">withConverter</button>
+  <button type="button" id="withConverter">Cookies.withConverter({encode: () => 'World', decode: () => 'Hello'})</button>
 </div>
 
 <div>
