@@ -7,7 +7,7 @@
 <body>
 
 <div>
-  <h2>Cookie.set</h2>
+  <h2>set</h2>
   <form id="setForm">
     <label for="setKey">
       Key
@@ -18,19 +18,19 @@
       <input id="setValue" type="text">
     </label>
 
-    <button type="submit" id="setCookie">Cookie.set</button>
+    <button type="submit" id="setCookie">set</button>
   </form>
 </div>
 
 <div>
-  <h2>Cookie.get</h2>
+  <h2>get</h2>
   <form id="getForm">
     <label for="getKey">
       Key
       <input id="getKey" type="text">
     </label>
 
-    <button type="submit" id="getCookie">Cookie.get</button>
+    <button type="submit" id="getCookie">get</button>
   </form>
 
   <p>
@@ -40,15 +40,21 @@
 </div>
 
 <div>
-  <h2>Cookie.del</h2>
+  <h2>del</h2>
   <form id="delForm">
     <label for="getKey">
       Key
       <input id="delKey" type="text">
     </label>
 
-    <button type="submit" id="delCookie">Cookie.del</button>
+    <button type="submit" id="delCookie">del</button>
   </form>
+</div>
+
+<div>
+  <h2>withAttributes</h2>
+  <p>点击后，之后设置的 Cookie 过期为 3 天后</p>
+  <button type="button" id="withAttributes">withAttributes({expires: 3})</button>
 </div>
 
 <div>

@@ -4,7 +4,15 @@
 import {defaultAttributes, defaultConverter, TWENTY_FOUR_HOURS} from './constants'
 import {Attributes, Converter} from './types'
 
-function init(initConverter: Converter, initAttributes: Attributes) {
+interface Cookie {
+  get: (key: string) => string | null
+  set: (key: string, value: string) => void
+  del: (key: string) => void
+  withConverter: (converter: Converter) => Cookie
+  withAttributes: (attributes: Partial<Attributes>) => Cookie
+}
+
+function init(initConverter: Converter, initAttributes: Attributes): Cookie {
   function get(key: string): string | null {
     if (typeof document === 'undefined') return null
 
@@ -29,7 +37,7 @@ function init(initConverter: Converter, initAttributes: Attributes) {
   /**
    * 设置 Cookie key-val 对
    */
-  function set(key: string, value: string, attributes = initAttributes): string | null {
+  function set(key: string, value: string, attributes = initAttributes) {
     if (typeof document === 'undefined') return null
 
     attributes = {...initAttributes, ...attributes}

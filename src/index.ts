@@ -12,6 +12,8 @@ const $getValue = document.querySelector<HTMLParagraphElement>('#getValue')
 
 const $delKey = document.querySelector<HTMLInputElement>('#delKey')
 
+const $withAttributes = document.querySelector<HTMLButtonElement>('#withAttributes')
+
 const $cookie = document.querySelector('#cookie')
 
 $setForm.onsubmit = (e) => {
@@ -43,6 +45,10 @@ $delForm.onsubmit = (e) => {
   Cookies.del(key)
 
   $cookie.textContent = document.cookie
+}
+
+$withAttributes.onclick = () => {
+  Cookies.withAttributes({expires: 3})
 }
 
 $cookie.textContent = document.cookie
