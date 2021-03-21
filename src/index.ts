@@ -1,5 +1,7 @@
 import Cookies from './lib/index'
 
+let myCookies = Cookies
+
 const $getForm = document.querySelector<HTMLFormElement>('#getForm')
 const $setForm = document.querySelector<HTMLFormElement>('#setForm')
 const $delForm = document.querySelector<HTMLFormElement>('#delForm')
@@ -22,7 +24,7 @@ $setForm.onsubmit = (e) => {
   const key = $setKey.value
   const value = $setValue.value
 
-  Cookies.set(key, value)
+  myCookies.set(key, value)
 
   $cookie.textContent = document.cookie
 }
@@ -32,7 +34,7 @@ $getForm.onsubmit = (e) => {
 
   const key = $getKey.value
 
-  const value = Cookies.get(key)
+  const value = myCookies.get(key)
 
   $getValue.textContent = value
 }
@@ -42,13 +44,13 @@ $delForm.onsubmit = (e) => {
 
   const key = $delKey.value
 
-  Cookies.del(key)
+  myCookies.del(key)
 
   $cookie.textContent = document.cookie
 }
 
 $withAttributes.onclick = () => {
-  Cookies.withAttributes({expires: 3})
+  myCookies = Cookies.withAttributes({expires: 3})
 }
 
 $cookie.textContent = document.cookie
