@@ -14,6 +14,7 @@ const $getValue = document.querySelector<HTMLParagraphElement>('#getValue')
 
 const $delKey = document.querySelector<HTMLInputElement>('#delKey')
 
+const $withConverter = document.querySelector<HTMLButtonElement>('#withConverter')
 const $withAttributes = document.querySelector<HTMLButtonElement>('#withAttributes')
 
 const $cookie = document.querySelector('#cookie')
@@ -47,6 +48,13 @@ $delForm.onsubmit = (e) => {
   myCookies.del(key)
 
   $cookie.textContent = document.cookie
+}
+
+$withConverter.onclick = () => {
+  myCookies = Cookies.withConverter({
+    encode: () => 'World',
+    decode: () => 'Hello',
+  })
 }
 
 $withAttributes.onclick = () => {
