@@ -1,7 +1,7 @@
 /**
  * 获取单个 Cookie
  */
-import {defaultAttributes, TWENTY_FOUR_HOURS} from './constants'
+import {defaultAttributes, defaultConverter, TWENTY_FOUR_HOURS} from './constants'
 
 function get(key: string): string | null {
   if (typeof document === 'undefined') return null
@@ -14,8 +14,8 @@ function get(key: string): string | null {
     const [curtKey, ...curtValue] = pair.split('=')
 
     try {
-      const parsedValue = decodeURIComponent(curtValue.join('-\='))  // 有可能 value 存在 '='
-      cookieStore[curtKey] = parsedValue
+      const decodeedValue = defaultConverter.decode(curtValue.join('='))  // 有可能 value 存在 '='
+      cookieStore[curtKey] = decodeedValue
     } catch (e) {}
 
     return curtKey === key // 如果相等时，就会 break
@@ -40,7 +40,7 @@ function set(key: string, value: string, attributes = defaultAttributes): string
     }
   }
 
-  value = encodeURIComponent(value)
+  value = defaultConverter.encode(value)
 
   // 获取 Cookie 其它属性的字符串形式
   const attrStr = Object.entries(attributes).reduce((prevStr, attrPair) => {
