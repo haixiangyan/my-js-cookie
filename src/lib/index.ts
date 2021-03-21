@@ -1,16 +1,8 @@
-interface Attributes {
-  path: string; // Cookie 对应路径
-  expires?: string | number | Date // Cookie 的过期时间，第N天过期
-}
-
-// 1000*60*60*24 or 86400000
-// 详见：https://stackoverflow.com/questions/18359401/javascript-date-gettime-code-snippet-with-mysterious-additional-characters
-const TWENTY_FOUR_HOURS = 864e5
-const defaultAttributes: Attributes = {path: '/'}
-
 /**
  * 获取单个 Cookie
  */
+import {defaultAttributes, TWENTY_FOUR_HOURS} from './constants'
+
 function get(key: string): string | null {
   const cookiePairs = document.cookie ? document.cookie.split('; ') : []
 
