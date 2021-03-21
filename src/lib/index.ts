@@ -4,6 +4,8 @@
 import {defaultAttributes, TWENTY_FOUR_HOURS} from './constants'
 
 function get(key: string): string | null {
+  if (typeof document === 'undefined') return null
+
   const cookiePairs = document.cookie ? document.cookie.split('; ') : []
 
   const cookieStore: Record<string, string> = {}
@@ -23,6 +25,8 @@ function get(key: string): string | null {
  * 设置 Cookie key-val 对
  */
 function set(key: string, value: string, attributes = defaultAttributes): string | null {
+  if (typeof document === 'undefined') return null
+
   attributes = {...defaultAttributes, ...attributes}
 
   if (attributes.expires) {
