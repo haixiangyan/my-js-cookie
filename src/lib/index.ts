@@ -24,8 +24,8 @@ function init(initConverter: Converter, initAttributes: Attributes): Cookie {
       const [curtKey, ...curtValue] = pair.split('=')
 
       try {
-        const decodeedValue = initConverter.decode(curtValue.join('='))  // 有可能 value 存在 '='
-        cookieStore[curtKey] = decodeedValue
+        // 有可能 value 存在 '='
+        cookieStore[curtKey] = initConverter.decode(curtValue.join('='))
       } catch (e) {}
 
       return curtKey === key // 如果相等时，就会 break
