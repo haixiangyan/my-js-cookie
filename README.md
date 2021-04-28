@@ -2,7 +2,7 @@
 
 ![](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/db9fe0d6cfc249988ce86d0da2e6701c~tplv-k3u1fbpfcp-zoom-1.image)
 
-> 项目源码：https://github.com/Haixiang6123/my-js-cookie
+> 文章源码：https://github.com/Haixiang6123/my-js-cookie
 >
 > 预览链接：http://yanhaixiang.com/my-js-cookie/
 >
