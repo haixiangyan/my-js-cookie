@@ -278,7 +278,7 @@ Cookies.attributes = {...Cookies.attributes, ...{ expires: 2 } }
 function withAttributes(myAttributes: Attribute) {
   customAttributes = {...customAttributes, ...myAttributes}
 }
-function withAttributes(myConverter: Converter) {
+function withConverter(myConverter: Converter) {
   customConverter = {...customConverter, ...myConverter}
 }
 
